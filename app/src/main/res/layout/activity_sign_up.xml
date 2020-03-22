@@ -4,90 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp">
+    tools:context=".SignUpActivity">
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+    <EditText
+        android:id="@+id/et_signup_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/email_placehoder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+    <EditText
+        android:id="@+id/et_signup_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="@+id/et_signup_email"
+        app:layout_constraintStart_toStartOf="@+id/et_signup_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_email" />
 
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/email_placehoder" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+    <EditText
+        android:id="@+id/et_signup_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/password_placeholder"
+        app:layout_constraintEnd_toEndOf="@+id/et_signup_name"
+        app:layout_constraintStart_toStartOf="@+id/et_signup_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_name" />
 
-        <EditText
-            android:id="@+id/editText6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/password_placeholder" />
+    <EditText
+        android:id="@+id/et_signup_passwordCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Password Check"
+        app:layout_constraintEnd_toEndOf="@+id/et_signup_password"
+        app:layout_constraintStart_toStartOf="@+id/et_signup_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_password" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
 
-        <EditText
-            android:id="@+id/editText5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/btn_signup_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/sign_up_btn_txt"
+        app:layout_constraintEnd_toEndOf="@+id/et_signup_passwordCheck"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="@+id/et_signup_passwordCheck"
+        app:layout_constraintTop_toBottomOf="@+id/et_signup_passwordCheck" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+    <Button
+        android:id="@+id/btn_signup_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:text="login"
+        app:layout_constraintEnd_toEndOf="@+id/btn_signup_signup"
+        app:layout_constraintStart_toStartOf="@+id/btn_signup_signup"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup_signup" />
 
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:text="@string/sign_up_btn_txt"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
