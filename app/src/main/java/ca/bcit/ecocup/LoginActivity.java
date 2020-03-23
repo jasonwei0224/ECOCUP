@@ -31,8 +31,6 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login_login=findViewById(R.id.btn_login_login);
         btn_login_login.setOnClickListener(onClickListner);
-        btn_login_passwordReset=findViewById(R.id.btn_login_passwordReset);
-        btn_login_passwordReset.setOnClickListener(onClickListner);
         btn_login_signup=findViewById(R.id.btn_login_signup);
         btn_login_signup.setOnClickListener(onClickListner);
 
@@ -46,11 +44,6 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.btn_login_login:
 //                    Log.e('cd', 'clickww');
                     login();
-                    break;
-                case R.id.btn_login_passwordReset:
-//                    Log.e('cd', 'clickww');
-//                    myStartActivity(PasswordResetActivity.class);
-                    System.out.println("Should make passwordResetActivity");
                     break;
                 case R.id.btn_login_signup:
 //                    Log.e('cd', 'clickww');

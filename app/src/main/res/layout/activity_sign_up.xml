@@ -7,30 +7,41 @@
     tools:context=".SignUpActivity">
 
 
+    <ImageView
+        android:id="@+id/iv_login_mainIcon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mainIcon" />
+
     <EditText
         android:id="@+id/et_signup_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:ems="10"
+        android:hint="@string/email_placehoder"
         android:inputType="textPersonName"
-        android:text="@string/email_placehoder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_login_mainIcon2"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="@+id/iv_login_mainIcon2"
+        app:layout_constraintTop_toBottomOf="@+id/iv_login_mainIcon2" />
 
     <EditText
         android:id="@+id/et_signup_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
         android:ems="10"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="@+id/et_signup_email"
         app:layout_constraintStart_toStartOf="@+id/et_signup_email"
         app:layout_constraintTop_toBottomOf="@+id/et_signup_email" />
@@ -40,12 +51,12 @@
         android:id="@+id/et_signup_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
         android:ems="10"
+        android:hint="@string/password_placeholder"
         android:inputType="textPersonName"
-        android:text="@string/password_placeholder"
         app:layout_constraintEnd_toEndOf="@+id/et_signup_name"
         app:layout_constraintStart_toStartOf="@+id/et_signup_name"
         app:layout_constraintTop_toBottomOf="@+id/et_signup_name" />
@@ -54,12 +65,12 @@
         android:id="@+id/et_signup_passwordCheck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Password Check"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/et_signup_password"
         app:layout_constraintStart_toStartOf="@+id/et_signup_password"
         app:layout_constraintTop_toBottomOf="@+id/et_signup_password" />
@@ -69,15 +80,14 @@
         android:id="@+id/btn_signup_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
         android:text="@string/sign_up_btn_txt"
         app:layout_constraintEnd_toEndOf="@+id/et_signup_passwordCheck"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="@+id/et_signup_passwordCheck"
         app:layout_constraintTop_toBottomOf="@+id/et_signup_passwordCheck" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
