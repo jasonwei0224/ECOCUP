@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "576681931905",
+    "firebase_url": "https://ecocup-3f8c1.firebaseio.com",
+    "project_id": "ecocup-3f8c1",
+    "storage_bucket": "ecocup-3f8c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576681931905:android:b0ccaa44d1664418e24980",
+        "android_client_info": {
+          "package_name": "ca.bcit.ecocup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576681931905-cveb2pvnfrhm83d6j8io8v6h1m8ep6oa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.bcit.ecocup",
+            "certificate_hash": "5efca32d56413309036cb42897e76c0378075ed2"
+          }
+        },
+        {
+          "client_id": "576681931905-09e8hqs30907r0lpb7dpa6qokka5jsp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL6mmsEKzggtDSMgEss6YW4lHNx2Fghgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576681931905-09e8hqs30907r0lpb7dpa6qokka5jsp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
