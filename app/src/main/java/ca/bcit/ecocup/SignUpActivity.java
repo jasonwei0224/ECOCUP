@@ -23,7 +23,6 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     Button btn_signup_signup;
-    Button btn_signup_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +32,6 @@ public class SignUpActivity extends AppCompatActivity {
         btn_signup_signup=findViewById(R.id.btn_signup_signup);
         btn_signup_signup.setOnClickListener(onClickListener);
 
-        btn_signup_login=findViewById(R.id.btn_signup_login);
-        btn_signup_login.setOnClickListener(onClickListener);
 
         mAuth=FirebaseAuth.getInstance();
     }
@@ -47,8 +44,6 @@ public class SignUpActivity extends AppCompatActivity {
                     signup();
                     System.out.println("Signup pressed");
                     break;
-                case R.id.btn_signup_login:
-                    myStartActivity(LoginActivity.class);
             }
         }
     };
@@ -99,10 +94,5 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onBackPressed() {
-        super.onBackPressed();
-        moveTaskToBack(true);
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
-    }
+
 }

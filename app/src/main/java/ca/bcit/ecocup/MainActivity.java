@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if(FirebaseAuth.getInstance().getCurrentUser()==null) {
-            startSignupActivity();
+            myStartActivity(LoginActivity.class);
         }
         btn_main_logout=findViewById(R.id.btn_main_logout);
         btn_main_logout.setOnClickListener(onClickListener);
@@ -40,14 +40,17 @@ public class MainActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.btn_main_logout:
                     FirebaseAuth.getInstance().signOut();
-                    startSignupActivity();
+                    myStartActivity(LoginActivity.class);
                     break;
             }
         }
     };
 
-    private void startSignupActivity() {
-        Intent intent=new Intent(this, SignUpActivity.class);
+    private void myStartActivity(Class c) {
+        Intent intent=new Intent(this, c);
+        // this is removing previous activity.. need to study.. this part..
+        // this is needed when we press back button, it turns off.. and log in maintains.
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

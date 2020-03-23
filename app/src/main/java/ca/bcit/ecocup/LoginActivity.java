@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     Button btn_login_login;
     Button btn_login_passwordReset;
+    Button btn_login_signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_login_login.setOnClickListener(onClickListner);
         btn_login_passwordReset=findViewById(R.id.btn_login_passwordReset);
         btn_login_passwordReset.setOnClickListener(onClickListner);
+        btn_login_signup=findViewById(R.id.btn_login_signup);
+        btn_login_signup.setOnClickListener(onClickListner);
 
         mAuth=FirebaseAuth.getInstance();
     }
@@ -48,6 +51,10 @@ public class LoginActivity extends AppCompatActivity {
 //                    Log.e('cd', 'clickww');
 //                    myStartActivity(PasswordResetActivity.class);
                     System.out.println("Should make passwordResetActivity");
+                    break;
+                case R.id.btn_login_signup:
+//                    Log.e('cd', 'clickww');
+                    myStartActivity(SignUpActivity.class);
                     break;
             }
         }
@@ -96,5 +103,11 @@ public class LoginActivity extends AppCompatActivity {
         // this is needed when we press back button, it turns off.. and log in maintains.
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 }
