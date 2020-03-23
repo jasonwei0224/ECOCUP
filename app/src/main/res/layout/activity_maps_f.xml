@@ -3,10 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mv_map_map"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Maps fragment"
-        android:textSize="50dp"/>
+        android:layout_height="match_parent">
+
+    </com.google.android.gms.maps.MapView>
 </LinearLayout>
