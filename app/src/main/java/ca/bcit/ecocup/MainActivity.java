@@ -2,10 +2,13 @@ package ca.bcit.ecocup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +16,20 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     Button btn_main_logout;
+    private BottomNavigationView bottomNavigationView;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+    private Points points;
+    private Rewards rewards;
+    private Maps maps;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +41,30 @@ public class MainActivity extends AppCompatActivity {
         }
         btn_main_logout=findViewById(R.id.btn_main_logout);
         btn_main_logout.setOnClickListener(onClickListener);
+
+        bottomNavigationView=findViewById(R.id.bn_general);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.action_user:
+                        setFrag(0);
+                        break;
+                    case R.id.action_quest:
+                        setFrag(1);
+                        break;
+                    case R.id.action_map:
+                        setFrag(2);
+                        break;
+                }
+                return true;
+            }
+        });
+        points=new Points();
+        rewards=new Rewards();
+        maps=new Maps();
+        setFrag(0);
+
 
 
     }
@@ -45,6 +80,27 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+
+    private void setFrag(int n){
+        fm=getSupportFragmentManager();
+        ft=fm.beginTransaction();
+        switch(n) {
+            case 0:
+                ft.replace(R.id.fl_main, points);
+                ft.commit();
+                break;
+            case 1:
+                ft.replace(R.id.fl_main, rewards);
+                ft.commit();
+                break;
+            case 2:
+                ft.replace(R.id.fl_main, maps);
+                ft.commit();
+                break;
+        }
+    }
+
 
     private void myStartActivity(Class c) {
         Intent intent=new Intent(this, c);
