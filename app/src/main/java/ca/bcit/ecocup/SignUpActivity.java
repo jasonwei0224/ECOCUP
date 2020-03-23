@@ -15,12 +15,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private static final String TAG="SignupActivity";
     private FirebaseAuth mAuth;
-
+    DatabaseReference database;
 
     Button btn_signup_signup;
 
@@ -34,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         mAuth=FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
     }
 
     View.OnClickListener onClickListener=new View.OnClickListener() {
@@ -62,6 +65,10 @@ public class SignUpActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     startToast("Success");
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    database.child("users").child(mAuth.getCurrentUser().getUid())
+                                            .child("history").setValue("");
+                                    database.child("users").child(mAuth.getCurrentUser().getUid())
+                                            .child("points").setValue(0);
                                     myStartActivity(MainActivity.class);
 
 
