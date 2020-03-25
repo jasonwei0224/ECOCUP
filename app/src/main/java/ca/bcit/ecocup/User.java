@@ -2,7 +2,7 @@ package ca.bcit.ecocup;
 
 public class User {
     private Long points;
-    private String history;
+    private History historys;
 
     public Long getPoints(){
         return this.points;
@@ -11,10 +11,10 @@ public class User {
         this.points = points;
     }
 
-    public void setHistory(String history){
-        this.history = history;
+    public void setHistorys(History history){
+        this.historys = history;
     }
-    public String getHistory(){
-        return this.history;
+    public History getHistorys(){
+        return this.historys;
     }
 }

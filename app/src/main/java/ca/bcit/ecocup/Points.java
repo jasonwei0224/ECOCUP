@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Points extends Fragment {
 
     private View view;
@@ -29,6 +32,7 @@ public class Points extends Fragment {
     ProgressBar progressBar;
     ValueEventListener mPointsListener;
     DatabaseReference mDatabase;
+    List<History> historyList;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,15 +42,22 @@ public class Points extends Fragment {
         userPoints = view.findViewById(R.id.userPoints);
         progressBar.setProgress(50);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        historyList = new ArrayList<>();
         ValueEventListener pointsListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                historyList.clear();
+                for(DataSnapshot userSnapshot: dataSnapshot.child("users'").child(mAuth.getUid()).child("historys").getChildren()) {
+                    User user = userSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
+                    if(user!=null){
+                        historyList.add(user.getHistorys());
+                    }
+                }
                 User u = (User) dataSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
+//                History h = dataSnapshot.child("users").child(mAuth.getUid()).child("historys").getValue(History.class);
                 assert u != null;
                 userPoints.setText(u.getPoints().toString());
-//                System.out.println("History" +u.getHistory());
-//                System.out.println("points" +u.getPoints());
+
 //
 //                System.out.println("success");
             }
