@@ -41,8 +41,14 @@ public class Points extends Fragment {
         ValueEventListener pointsListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                System.out.println(dataSnapshot.getValue());
-                System.out.println("success");
+
+                User u = (User) dataSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
+                assert u != null;
+                userPoints.setText(u.getPoints().toString());
+//                System.out.println("History" +u.getHistory());
+//                System.out.println("points" +u.getPoints());
+//
+//                System.out.println("success");
             }
 
             @Override
