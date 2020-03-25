@@ -21,6 +21,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
     Button btn_main_logout;
     private BottomNavigationView bottomNavigationView;
@@ -29,12 +38,16 @@ public class MainActivity extends AppCompatActivity {
     private Points points;
     private Rewards rewards;
     private Maps maps;
+    private ArrayList<Vendor> vendors =new ArrayList<>();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        readVendorData();
 
         if(FirebaseAuth.getInstance().getCurrentUser()==null) {
             myStartActivity(LoginActivity.class);
@@ -63,7 +76,15 @@ public class MainActivity extends AppCompatActivity {
         points=new Points();
         rewards=new Rewards();
         maps=new Maps();
+
         setFrag(0);
+
+
+        Bundle bundle;
+        bundle=new Bundle();
+        bundle.putParcelableArrayList("arraylist", vendors);
+        maps.setArguments(bundle);
+
 
 
 
@@ -95,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 ft.commit();
                 break;
             case 2:
+
                 ft.replace(R.id.fl_main, maps);
                 ft.commit();
                 break;
@@ -108,6 +130,48 @@ public class MainActivity extends AppCompatActivity {
         // this is needed when we press back button, it turns off.. and log in maintains.
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+
+
+    private void readVendorData() {
+        System.out.println("Working?");
+        InputStream is=getResources().openRawResource(R.raw.data2);
+        BufferedReader reader=new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+        String line="";
+        try {
+            //stop over headers
+            reader.readLine();
+            while((line=reader.readLine())!=null) {
+                //split by ","
+                String[] token=line.split(",");
+
+                //read the data
+                Vendor sample=new Vendor();
+                sample.setName(token[27]);
+                if(token[1].length()>0) {
+                    sample.setY(Double.parseDouble(token[1]));
+                }else {
+                    sample.setY(0);
+                }
+
+                if(token[2].length()>0) {
+                    sample.setX(Double.parseDouble(token[2]));
+                }else {
+                    sample.setX(0);
+                }
+
+                vendors.add(sample);
+
+                System.out.println(sample);
+            }
+        }catch(IOException e) {
+
+            e.printStackTrace();
+        }
+
     }
 
 }

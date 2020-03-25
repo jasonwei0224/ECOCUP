@@ -30,9 +30,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAQaRkDGZbkgoBJ6-fhy3uNdYqbGJvRgLg" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
         <activity android:name=".Rewards" />
         <activity android:name=".Points" />
         <activity android:name=".SignUpActivity" />
