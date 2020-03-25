@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         setFrag(0);
 
-
+        //this is to send data from mainactivity to other fragment.
         Bundle bundle;
         bundle=new Bundle();
         bundle.putParcelableArrayList("arraylist", vendors);
@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    //this method is to read data from raw data2.csv. (from tutorial)
     private void readVendorData() {
-        System.out.println("Working?");
         InputStream is=getResources().openRawResource(R.raw.data2);
         BufferedReader reader=new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
@@ -164,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 vendors.add(sample);
-
                 System.out.println(sample);
             }
         }catch(IOException e) {

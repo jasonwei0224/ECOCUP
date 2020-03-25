@@ -3,6 +3,13 @@ package ca.bcit.ecocup;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+
+/**
+ * This class is to represent cafe vendors in Burnaby.
+ * The data in data2.csv file will be shown each vendors.
+ * It has name of the vendor, x for Latitude, and y for longitude.
+ * Also, to transfer ArrayList of vendors, vendor class should implment Parcelable interfaces.
+ */
 public class Vendor implements Parcelable {
     String name;
     double x;
