@@ -61,6 +61,15 @@
             android:layout_gravity="center"
             android:text="@string/redeem" />
 
+        <Button
+            android:id="@+id/btn_main_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            tools:layout_editor_absoluteX="149dp"
+            tools:layout_editor_absoluteY="44dp">
+
+        </Button>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

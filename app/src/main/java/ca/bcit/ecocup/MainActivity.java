@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn_main_logout;
+
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fm;
     private FragmentTransaction ft;
@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
         if(FirebaseAuth.getInstance().getCurrentUser()==null) {
             myStartActivity(LoginActivity.class);
         }
-        btn_main_logout=findViewById(R.id.btn_main_logout);
-        btn_main_logout.setOnClickListener(onClickListener);
+
 
         bottomNavigationView=findViewById(R.id.bn_general);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -94,17 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    View.OnClickListener onClickListener=new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.btn_main_logout:
-                    FirebaseAuth.getInstance().signOut();
-                    myStartActivity(LoginActivity.class);
-                    break;
-            }
-        }
-    };
+
 
 
     private void setFrag(int n){
