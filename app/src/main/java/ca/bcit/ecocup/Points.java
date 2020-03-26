@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ public class Points extends Fragment {
     List<History> historyList;
 
     Button btn_main_logout;
+    private ListView listView;
 
 
     @Nullable
@@ -50,6 +52,7 @@ public class Points extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         progressBar = view.findViewById(R.id.progressBar);
         userPoints = view.findViewById(R.id.userPoints);
+        listView = view.findViewById(R.id.history);
         progressBar.setProgress(50);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         historyList = new ArrayList<>();
@@ -60,6 +63,7 @@ public class Points extends Fragment {
                 for(DataSnapshot userSnapshot: dataSnapshot.child("users'").child(mAuth.getUid()).child("historys").getChildren()) {
                     User user = userSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
                     if(user!=null){
+                        System.out.println(userSnapshot);
                         historyList.add(user.getHistorys());
                     }
                 }
@@ -68,6 +72,8 @@ public class Points extends Fragment {
                 assert u != null;
                 userPoints.setText(u.getPoints().toString());
 
+                HistoryListAdapter adapter = new HistoryListAdapter(getActivity(), historyList);
+                listView.setAdapter(adapter);
 //
 //                System.out.println("success");
             }
