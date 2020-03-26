@@ -17,27 +17,45 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This is fragment for maps.
+ */
 public class Maps extends Fragment implements OnMapReadyCallback {
 
     private View mView;
     GoogleMap mGoogleMap;
     MapView mMapView;
+    ArrayList<Vendor> vendors;
 
     public Maps() {
 
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView=inflater.inflate(R.layout.activity_maps_f, container, false);
+
+        //this is to receive arraylist of vendors from MainActivity.
+        Bundle bundle= getArguments();
+        vendors=bundle.getParcelableArrayList("arraylist");
+
         return mView;
     }
+
+    //this is for google map implementation. (from Tutorial)
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -50,17 +68,20 @@ public class Maps extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    //this is for google map implementation. (from Tutorial)
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize((getContext()));
         mGoogleMap=googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(40, -74)).title("STA").snippet("asdf"));
-        CameraPosition Liberty=CameraPosition.builder().target(new LatLng(40,-74)).zoom(5).bearing(0).tilt(45).build();
+        //adding markers from arraylist of vendors using for loop.
+        for(int i=0;i<vendors.size();i++) {
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(vendors.get(i).x, vendors.get(i).y)).title(vendors.get(i).name));
+        }
+
+        CameraPosition Liberty=CameraPosition.builder().target(new LatLng(49.238081,-122.993017)).zoom(11).bearing(0).tilt(0).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Liberty));
     }
-
-
 
 }

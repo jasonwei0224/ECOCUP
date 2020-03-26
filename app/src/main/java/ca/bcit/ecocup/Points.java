@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.media.tv.TvContract;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,15 +27,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Points extends Fragment {
 
     private View view;
+
     private FirebaseAuth mAuth;
     private TextView userPoints;
     ProgressBar progressBar;
     ValueEventListener mPointsListener;
     DatabaseReference mDatabase;
     List<History> historyList;
+
+    Button btn_main_logout;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,8 +78,22 @@ public class Points extends Fragment {
             }
         };
         mDatabase.addValueEventListener(pointsListener);
+        btn_main_logout=view.findViewById(R.id.btn_main_logout);
+        btn_main_logout.setOnClickListener(onClickListener);
         return view;
 
     }
+    View.OnClickListener onClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btn_main_logout:
+                    FirebaseAuth.getInstance().signOut();
+                    Intent i=new Intent(getActivity(), LoginActivity.class);
+                    startActivity(i);
+                    break;
+            }
+        }
+    };
 
 }

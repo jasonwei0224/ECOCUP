@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG="SignupActivity";
     private FirebaseAuth mAuth;
     Button btn_login_login;
-    Button btn_login_passwordReset;
     Button btn_login_signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch(view.getId()) {
                 case R.id.btn_login_login:
-//                    Log.e('cd', 'clickww');
                     login();
                     break;
                 case R.id.btn_login_signup:
-//                    Log.e('cd', 'clickww');
                     myStartActivity(SignUpActivity.class);
                     break;
             }
