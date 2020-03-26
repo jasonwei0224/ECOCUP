@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "576681931905-44c9m4g1t6591r42f8qkge465e201rj1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.bcit.ecocup",
+            "certificate_hash": "aa6e5ffee4ce8b598cb01f941a592ea95664a888"
+          }
+        },
+        {
           "client_id": "576681931905-cveb2pvnfrhm83d6j8io8v6h1m8ep6oa.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
