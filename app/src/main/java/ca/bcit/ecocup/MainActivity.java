@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 sample.setTitle(token[1]);
                 sample.setDate(token[2]);
                 sample.setDescription(token[3]);
+                sample.setPoint(Integer.parseInt(token[4]));
 
                 exhibitions.add(sample);
                 System.out.println(sample);
