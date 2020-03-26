@@ -3,16 +3,16 @@ package ca.bcit.ecocup;
 import java.util.Date;
 
 public class History {
-    private String historyID;
+    private String id;
     private Long points;
     private long date;
 
-    public void setHistoryID(String historyID) {
-        this.historyID = historyID;
+    public void setId(String historyID) {
+        this.id = historyID;
     }
 
-    public String getHistoryID() {
-        return historyID;
+    public String getId() {
+        return id;
     }
 
     public Long getPoints() {
