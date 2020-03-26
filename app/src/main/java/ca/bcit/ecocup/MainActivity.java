@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Rewards rewards;
     private Maps maps;
     private ArrayList<Vendor> vendors =new ArrayList<>();
+    private ArrayList<Exhibition> exhibitions =new ArrayList<>();
 
 
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         readVendorData();
+        readMuseumData();
 
         if(FirebaseAuth.getInstance().getCurrentUser()==null) {
             myStartActivity(LoginActivity.class);
@@ -83,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle;
         bundle=new Bundle();
         bundle.putParcelableArrayList("arraylist", vendors);
+        bundle.putParcelableArrayList("exhibitions", exhibitions);
         maps.setArguments(bundle);
+        rewards.setArguments(bundle);
 
 
 
@@ -164,6 +168,38 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 vendors.add(sample);
+                System.out.println(sample);
+            }
+        }catch(IOException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
+
+    //this method is to read data from raw data2.csv. (from tutorial)
+    private void readMuseumData() {
+        InputStream is=getResources().openRawResource(R.raw.data);
+        BufferedReader reader=new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+        String line="";
+        try {
+            //stop over headers
+            reader.readLine();
+            while((line=reader.readLine())!=null) {
+                //split by ","
+                String[] token=line.split(",");
+
+                //read the data
+                Exhibition sample=new Exhibition();
+                sample.setNo(Integer.parseInt(token[0]));
+                sample.setTitle(token[1]);
+                sample.setDate(token[2]);
+                sample.setDescription(token[3]);
+
+                exhibitions.add(sample);
                 System.out.println(sample);
             }
         }catch(IOException e) {
