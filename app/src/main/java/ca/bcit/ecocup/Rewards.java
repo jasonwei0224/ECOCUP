@@ -84,9 +84,9 @@ public class Rewards extends Fragment {
                 view=li.inflate(R.layout.j21, viewGroup, false);
             }
             //need to check
-            ImageView iv = view.findViewById(R.id.test1lv);
-            TextView tv = view.findViewById(R.id.test2);
-            TextView tv2 = view.findViewById(R.id.test3);
+            ImageView iv = view.findViewById(R.id.iv_rewards_pic);
+            TextView tv = view.findViewById(R.id.tv_rewards_title);
+            TextView tv2 = view.findViewById(R.id.tv_rewards_date);
 
             Exhibition exhibition=exhibitions.get(i);
 
