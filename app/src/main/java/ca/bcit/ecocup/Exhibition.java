@@ -15,6 +15,7 @@ public class Exhibition implements Parcelable {
     String title;
     String date;
     String description;
+    int point;
 
     public Exhibition() {
 
@@ -25,6 +26,7 @@ public class Exhibition implements Parcelable {
         title=src.readString();
         date=src.readString();
         description=src.readString();
+        point=src.readInt();
     }
 
     public static final Creator<Exhibition> CREATOR=new Creator<Exhibition>() {
@@ -70,8 +72,17 @@ public class Exhibition implements Parcelable {
         this.description= description;
     }
 
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+
     public String toString() {
-        return no+" "+title+" "+date;
+        return no+" "+title+" "+date+" "+point;
     }
 
     @Override
@@ -85,5 +96,6 @@ public class Exhibition implements Parcelable {
         parcel.writeString(title);
         parcel.writeString(date);
         parcel.writeString(description);
+        parcel.writeInt(point);
     }
 }
