@@ -2,6 +2,7 @@ package ca.bcit.ecocup;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,10 @@ public class HistoryListAdapter extends ArrayAdapter<History> {
     private Activity context;
     private List<History> historyList;
 
-    public HistoryListAdapter(Activity context, List<History> histories){
-        super(context,R.layout.list_layout ,histories);
+    public HistoryListAdapter(Activity context, List<History> historyList){
+        super(context,R.layout.list_layout ,historyList);
         this.context = context;
-        this.historyList = histories;
+        this.historyList = historyList;
     }
 
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
