@@ -18,11 +18,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Rewards extends Fragment {
 
@@ -34,12 +44,17 @@ public class Rewards extends Fragment {
     TextView tv_popup_desc;
     TextView tv_popup_point;
     ImageView popup_close_popup;
-
+    Button confirmBtn;
+    DatabaseReference mDatabase;
+    FirebaseAuth mAuth;
+    long points;
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.activity_rewards, container, false);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
         //this is to receive arraylist of vendors from MainActivity.
         Bundle bundle= getArguments();
         exhibitions=bundle.getParcelableArrayList("exhibitions");
@@ -60,11 +75,11 @@ public class Rewards extends Fragment {
 
         lv_rewards_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
                 view=LayoutInflater.from(getActivity()).inflate(R.layout.custom_popup, null);
                 tv_popup_title=view.findViewById(R.id.tv_popup_title);
                 tv_popup_title.setText(exhibitions.get(i).getTitle());
-
+                confirmBtn = view.findViewById(R.id.confirm);
                 int[] images=new int[6];
                 images[0]=R.drawable.pic1;
                 images[1]=R.drawable.pic2;
@@ -93,6 +108,41 @@ public class Rewards extends Fragment {
                     @Override
                     public void onClick(View view) {
                         epicDialog.dismiss();
+                    }
+                });
+
+                if (points < exhibitions.get(i).getPoint()){
+                    confirmBtn.setClickable(false);
+                }
+                ValueEventListener pointsListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        User u = (User) dataSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
+
+                        assert u != null;
+                        points = u.getPoints();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                };
+                confirmBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        points = points - exhibitions.get(i).getPoint();
+                        Map<String, Object> update = new HashMap<>();
+                        update.put("/points", points);
+                        String id = mDatabase.push().getKey();
+                        History h = new History();
+                        h.setType("Redeem");
+                        h.setPoints(points);
+                        h.setDate(System.currentTimeMillis());
+                        update.put("/historys/"+id, h);
+
+                        mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
                     }
                 });
 
