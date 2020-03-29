@@ -111,16 +111,14 @@ public class Rewards extends Fragment {
                     }
                 });
 
-                if (points < exhibitions.get(i).getPoint()){
-                    confirmBtn.setClickable(false);
-                }
+
                 ValueEventListener pointsListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        User u = (User) dataSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
+                        long p = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
 
-                        assert u != null;
-                        points = u.getPoints();
+//                       assert u != null;
+                        points = p;
 
                     }
 
@@ -129,10 +127,13 @@ public class Rewards extends Fragment {
 
                     }
                 };
+                mDatabase.addValueEventListener(pointsListener);
+
                 confirmBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         points = points - exhibitions.get(i).getPoint();
+                        System.out.println("POints " + Long.toString(points));
                         Map<String, Object> update = new HashMap<>();
                         update.put("/points", points);
                         String id = mDatabase.push().getKey();
@@ -140,11 +141,16 @@ public class Rewards extends Fragment {
                         h.setType("Redeem");
                         h.setPoints(points);
                         h.setDate(System.currentTimeMillis());
-                        update.put("/historys/"+id, h);
+                        update.put(id, h);
 
                         mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
                     }
                 });
+
+                if (points < exhibitions.get(i).getPoint()){
+                    confirmBtn.setClickable(false);
+                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.colorBlack));
+                }
 
                 epicDialog.setContentView(view);
                 epicDialog.show();

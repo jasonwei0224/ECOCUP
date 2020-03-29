@@ -36,6 +36,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_login_signup.setOnClickListener(onClickListner);
 
         mAuth=FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            myStartActivity(MainActivity.class);
+        }
     }
 
     View.OnClickListener onClickListner=new View.OnClickListener() {
