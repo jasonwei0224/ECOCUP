@@ -37,7 +37,6 @@ public class Points extends Fragment {
 
     private FirebaseAuth mAuth;
     private TextView userPoints;
-    ProgressBar progressBar;
     ValueEventListener mPointsListener;
     DatabaseReference mDatabase;
     List<History> historyList;
@@ -57,10 +56,9 @@ public class Points extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.activity_points, container, false);
         mAuth = FirebaseAuth.getInstance();
-        progressBar = view.findViewById(R.id.progressBar);
         userPoints = view.findViewById(R.id.userPoints);
         listView = view.findViewById(R.id.history);
-        progressBar.setProgress(50);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         historyList = new ArrayList<>();
 
