@@ -5,7 +5,7 @@ import java.util.Date;
 public class History {
     private String id;
     private Long points;
-    private long date;
+    private Date date;
     private String type;
 
     public String getType() {
@@ -33,10 +33,10 @@ public class History {
     }
 
     public Date getDate() {
-        return new Date(date);
+        return this.date;
     }
 
-    public void setDate(long date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

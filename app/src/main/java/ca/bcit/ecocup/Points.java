@@ -50,7 +50,6 @@ public class Points extends Fragment {
         super.onAttach(context);
         mContext = context;
         mAuth = FirebaseAuth.getInstance();
-        System.out.println(mAuth.getCurrentUser());
     }
 
     @Nullable
@@ -64,35 +63,7 @@ public class Points extends Fragment {
         progressBar.setProgress(50);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         historyList = new ArrayList<>();
-        ValueEventListener pointsListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                historyList.clear();
-                for(DataSnapshot userSnapshot: dataSnapshot.child("users'").child(mAuth.getUid()).getChildren()) {
-                    //User user = userSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
-                    History h = userSnapshot.getValue(History.class);
 
-                        System.out.println(userSnapshot);
-                        historyList.add(h);
-
-                }
-                long points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
-//                History h = dataSnapshot.child("users").child(mAuth.getUid()).child("historys").getValue(History.class);
-//                assert points != null;
-                userPoints.setText(Long.toString(points));
-
-//                HistoryListAdapter adapter = new HistoryListAdapter(getActivity(), historyList);
-//                listView.setAdapter(adapter);
-//
-//                System.out.println("success");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-        mDatabase.addValueEventListener(pointsListener);
         btn_main_logout=view.findViewById(R.id.btn_main_logout);
         btn_main_logout.setOnClickListener(onClickListener);
         return view;
@@ -111,4 +82,34 @@ public class Points extends Fragment {
         }
     };
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ValueEventListener pointsListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                historyList.clear();
+
+                for(DataSnapshot userSnapshot: dataSnapshot.child("users").child(mAuth.getUid()).getChildren()) {
+                    if(userSnapshot.hasChildren()) {
+                        History h = userSnapshot.getValue(History.class);
+                        historyList.add(h);
+                    }
+
+                }
+
+                long points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
+                userPoints.setText(Long.toString(points));
+
+                HistoryListAdapter adapter = new HistoryListAdapter(mContext, historyList);
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        mDatabase.addValueEventListener(pointsListener);
+    }
 }

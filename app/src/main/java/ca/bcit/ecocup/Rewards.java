@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +59,7 @@ public class Rewards extends Fragment {
         //this is to receive arraylist of vendors from MainActivity.
         Bundle bundle= getArguments();
         exhibitions=bundle.getParcelableArrayList("exhibitions");
-        System.out.println(exhibitions);
+//        System.out.println(exhibitions);
 
 
         ListView lv_rewards_listview=(ListView)view.findViewById(R.id.lv_rewards_listview);
@@ -140,7 +141,7 @@ public class Rewards extends Fragment {
                         History h = new History();
                         h.setType("Redeem");
                         h.setPoints(points);
-                        h.setDate(System.currentTimeMillis());
+                        h.setDate( new Date(System.currentTimeMillis()));
                         update.put(id, h);
 
                         mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);

@@ -18,17 +18,18 @@ import ca.bcit.ecocup.History;
 import ca.bcit.ecocup.R;
 
 public class HistoryListAdapter extends ArrayAdapter<History> {
-    private Activity context;
+    private Context context;
     private List<History> historyList;
 
-    public HistoryListAdapter(Activity context, List<History> historyList){
+    public HistoryListAdapter(Context context, List<History> historyList){
         super(context,R.layout.list_layout ,historyList);
+
         this.context = context;
         this.historyList = historyList;
     }
 
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         @SuppressLint({"ViewHolder", "InflateParams"})
         View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
