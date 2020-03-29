@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private Maps maps;
     private ArrayList<Vendor> vendors =new ArrayList<>();
     private ArrayList<Exhibition> exhibitions =new ArrayList<>();
-
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -50,9 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
         readVendorData();
         readMuseumData();
+        mAuth = FirebaseAuth.getInstance();
+        System.out.println("In Main");
+        if(mAuth.getCurrentUser()==null) {
 
-        if(FirebaseAuth.getInstance().getCurrentUser()==null) {
+//            System.out.println(mAuth.getCurrentUser());
+
             myStartActivity(LoginActivity.class);
+
         }
 
 
@@ -78,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         rewards=new Rewards();
         maps=new Maps();
 
-        setFrag(0);
+
 
         //this is to send data from mainactivity to other fragment.
         Bundle bundle;
@@ -87,14 +92,10 @@ public class MainActivity extends AppCompatActivity {
         bundle.putParcelableArrayList("exhibitions", exhibitions);
         maps.setArguments(bundle);
         rewards.setArguments(bundle);
-
-
-
-
+        if(mAuth.getCurrentUser()!= null){
+            setFrag(0);
+        }
     }
-
-
-
 
     private void setFrag(int n){
         fm=getSupportFragmentManager();
@@ -157,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 vendors.add(sample);
-                System.out.println(sample);
+               // System.out.println(sample);
             }
         }catch(IOException e) {
 
@@ -190,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 sample.setPoint(Integer.parseInt(token[4]));
 
                 exhibitions.add(sample);
-                System.out.println(sample);
+               // System.out.println(sample);
             }
         }catch(IOException e) {
 

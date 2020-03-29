@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.media.tv.TvContract;
 
 import android.content.Intent;
@@ -43,7 +44,14 @@ public class Points extends Fragment {
 
     Button btn_main_logout;
     private ListView listView;
-
+    Context mContext;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+        mAuth = FirebaseAuth.getInstance();
+        System.out.println(mAuth.getCurrentUser());
+    }
 
     @Nullable
     @Override
@@ -60,20 +68,21 @@ public class Points extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 historyList.clear();
-                for(DataSnapshot userSnapshot: dataSnapshot.child("users'").child(mAuth.getUid()).child("historys").getChildren()) {
-                    User user = userSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
-                    if(user!=null){
-                        System.out.println(userSnapshot);
-                        historyList.add(user.getHistorys());
-                    }
-                }
-                User u = (User) dataSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
-//                History h = dataSnapshot.child("users").child(mAuth.getUid()).child("historys").getValue(History.class);
-                assert u != null;
-                userPoints.setText(u.getPoints().toString());
+                for(DataSnapshot userSnapshot: dataSnapshot.child("users'").child(mAuth.getUid()).getChildren()) {
+                    //User user = userSnapshot.child("users").child(mAuth.getUid()).getValue(User.class);
+                    History h = userSnapshot.getValue(History.class);
 
-                HistoryListAdapter adapter = new HistoryListAdapter(getActivity(), historyList);
-                listView.setAdapter(adapter);
+                        System.out.println(userSnapshot);
+                        historyList.add(h);
+
+                }
+                long points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
+//                History h = dataSnapshot.child("users").child(mAuth.getUid()).child("historys").getValue(History.class);
+//                assert points != null;
+                userPoints.setText(Long.toString(points));
+
+//                HistoryListAdapter adapter = new HistoryListAdapter(getActivity(), historyList);
+//                listView.setAdapter(adapter);
 //
 //                System.out.println("success");
             }
