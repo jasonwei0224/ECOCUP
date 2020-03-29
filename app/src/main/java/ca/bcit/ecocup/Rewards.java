@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +59,7 @@ public class Rewards extends Fragment {
         //this is to receive arraylist of vendors from MainActivity.
         Bundle bundle= getArguments();
         exhibitions=bundle.getParcelableArrayList("exhibitions");
-        System.out.println(exhibitions);
+//        System.out.println(exhibitions);
 
 
         ListView lv_rewards_listview=(ListView)view.findViewById(R.id.lv_rewards_listview);
@@ -100,7 +101,7 @@ public class Rewards extends Fragment {
                 tv_popup_desc.setText(exhibitions.get(i).getDescription());
 
                 tv_popup_point=view.findViewById(R.id.tv_popup_point);
-                tv_popup_point.setText(Integer.toString(exhibitions.get(i).getPoint())+"POINT");
+                tv_popup_point.setText(Integer.toString(exhibitions.get(i).getPoint())+" POINTS");
 //                System.out.println(exhibitions.get(i).getPoint());
 
                 popup_close_popup=view.findViewById(R.id.popup_close_popup);
@@ -133,14 +134,14 @@ public class Rewards extends Fragment {
                     @Override
                     public void onClick(View view) {
                         points = points - exhibitions.get(i).getPoint();
-                        System.out.println("POints " + Long.toString(points));
+                        System.out.println("POints " + points);
                         Map<String, Object> update = new HashMap<>();
                         update.put("/points", points);
                         String id = mDatabase.push().getKey();
                         History h = new History();
                         h.setType("Redeem");
-                        h.setPoints(points);
-                        h.setDate(System.currentTimeMillis());
+                        h.setPointsRedeem(0 - Long.valueOf(exhibitions.get(i).getPoint()));
+                        h.setDate( new Date(System.currentTimeMillis()));
                         update.put(id, h);
 
                         mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
@@ -213,7 +214,7 @@ public class Rewards extends Fragment {
             }
 
             tv.setText(exhibition.getTitle());
-            System.out.println(exhibition.getTitle());
+//            System.out.println(exhibition.getTitle());
             tv2.setText(exhibition.getDate());
 
             return view;

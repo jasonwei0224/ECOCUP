@@ -4,9 +4,10 @@ import java.util.Date;
 
 public class History {
     private String id;
-    private Long points;
-    private long date;
+    private Long pointsRedeem;
+    private Date date;
     private String type;
+
 
     public String getType() {
         return type;
@@ -24,19 +25,26 @@ public class History {
         return id;
     }
 
-    public Long getPoints() {
-        return points;
+    public Long getPointsRedeem(){
+        return pointsRedeem;
+    }
+    public void setPointsRedeem(Long pointsRedeem){
+        this.pointsRedeem = pointsRedeem;
     }
 
-    public void setPoints(Long points) {
-        this.points = points;
-    }
+//    public Long getPoints() {
+//        return points;
+//    }
+//
+//    public void setPoints(Long points) {
+//        this.points = points;
+//    }
 
     public Date getDate() {
-        return new Date(date);
+        return this.date;
     }
 
-    public void setDate(long date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }
