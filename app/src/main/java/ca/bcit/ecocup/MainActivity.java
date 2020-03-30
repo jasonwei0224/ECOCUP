@@ -20,6 +20,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,6 +32,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Vendor> vendors =new ArrayList<>();
     private ArrayList<Exhibition> exhibitions =new ArrayList<>();
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private Long valueOfCurrentPoint;
 
 
     @Override
@@ -51,7 +60,10 @@ public class MainActivity extends AppCompatActivity {
         readVendorData();
         readMuseumData();
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         System.out.println("In Main");
+
+
         if(mAuth.getCurrentUser()==null) {
 
 //            System.out.println(mAuth.getCurrentUser());
@@ -95,6 +107,56 @@ public class MainActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser()!= null){
             setFrag(0);
         }
+
+
+
+        Intent i =getIntent();
+        try{
+            if(i.getExtras().getString("answer")!=null) {
+                String answer=i.getExtras().getString("answer");
+                valueOfCurrentPoint=i.getExtras().getLong("point");
+                System.out.println("mainactivity(answer)"+answer);
+                System.out.println("mainactivity(point)"+valueOfCurrentPoint);
+
+                databaseWrite(answer, valueOfCurrentPoint);
+            }
+        }catch(NullPointerException e) {
+            System.out.println("null");
+        }
+
+
+
+
+
+    }
+
+
+
+    private void databaseWrite(String answer, Long valueOfCurrentPoint) {
+
+        System.out.println("database write");
+        System.out.println(answer);
+        System.out.println(valueOfCurrentPoint);
+        if(answer.equals("startbucks")) {
+            System.out.println("start");
+            System.out.println("points in databaseWrite"+valueOfCurrentPoint);
+            System.out.println(valueOfCurrentPoint+30);
+            System.out.println("end");
+        }
+        System.out.println("points in databaseWrite"+valueOfCurrentPoint);
+
+//        points = points - exhibitions.get(i).getPoint();
+//        System.out.println("POints " + points);
+//        Map<String, Object> update = new HashMap<>();
+//        update.put("/points", points);
+//        String id = mDatabase.push().getKey();
+//        History h = new History();
+//        h.setType("Redeem");
+//        h.setPointsRedeem(0 - Long.valueOf(exhibitions.get(i).getPoint()));
+//        h.setDate( new Date(System.currentTimeMillis()));
+//        update.put(id, h);
+//
+//        mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
     }
 
     private void setFrag(int n){
