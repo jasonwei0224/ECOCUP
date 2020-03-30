@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorMain"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
 
     <ImageView
         android:id="@+id/iv_login_mainIcon"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mainicon" />
+        app:srcCompat="@drawable/logo5" />
 
     <EditText
         android:id="@+id/et_login_email"
@@ -54,6 +55,8 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Login"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/button_main"
         app:layout_constraintEnd_toEndOf="@+id/et_login_password"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="@+id/et_login_password"
@@ -67,6 +70,8 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="Signup"
+        android:background="@drawable/button_main"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="@+id/btn_login_login"
         app:layout_constraintStart_toStartOf="@+id/btn_login_login"
         app:layout_constraintTop_toBottomOf="@+id/btn_login_login"></Button>
