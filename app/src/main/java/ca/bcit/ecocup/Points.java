@@ -37,11 +37,13 @@ public class Points extends Fragment {
 
     private FirebaseAuth mAuth;
     private TextView userPoints;
+    long points;
     ValueEventListener mPointsListener;
     DatabaseReference mDatabase;
     List<History> historyList;
 
     Button btn_main_logout;
+    Button btn_points_qr;
     private ListView listView;
     Context mContext;
     @Override
@@ -64,6 +66,13 @@ public class Points extends Fragment {
 
         btn_main_logout=view.findViewById(R.id.btn_main_logout);
         btn_main_logout.setOnClickListener(onClickListener);
+
+        btn_points_qr=view.findViewById(R.id.btn_points_qr);
+        btn_points_qr.setOnClickListener(onClickListener);
+
+
+
+
         return view;
 
     }
@@ -75,6 +84,12 @@ public class Points extends Fragment {
                     FirebaseAuth.getInstance().signOut();
                     Intent i=new Intent(getActivity(), LoginActivity.class);
                     startActivity(i);
+                    break;
+                case R.id.btn_points_qr:
+                    Intent j=new Intent(getActivity(), QRcode.class);
+                    System.out.println("What is in btn_points_qr"+points);
+                    j.putExtra("points", points);
+                    startActivity(j);
                     break;
             }
         }
@@ -96,7 +111,7 @@ public class Points extends Fragment {
 
                 }
 
-                long points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
+                points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
                 userPoints.setText(Long.toString(points));
 
                 HistoryListAdapter adapter = new HistoryListAdapter(mContext, historyList);

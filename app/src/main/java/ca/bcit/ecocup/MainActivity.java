@@ -20,6 +20,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,6 +32,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Vendor> vendors =new ArrayList<>();
     private ArrayList<Exhibition> exhibitions =new ArrayList<>();
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private Long valueOfCurrentPoint;
 
 
     @Override
@@ -51,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
         readVendorData();
         readMuseumData();
         mAuth = FirebaseAuth.getInstance();
-        System.out.println("In Main");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
         if(mAuth.getCurrentUser()==null) {
 
 //            System.out.println(mAuth.getCurrentUser());
@@ -59,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             myStartActivity(LoginActivity.class);
 
         }
+
 
 
         bottomNavigationView=findViewById(R.id.bn_general);
@@ -95,6 +107,38 @@ public class MainActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser()!= null){
             setFrag(0);
         }
+
+
+
+        Intent i =getIntent();
+        try{
+            if(i.getExtras().getString("answer")!=null) {
+                String answer=i.getExtras().getString("answer");
+                valueOfCurrentPoint=i.getExtras().getLong("points");
+
+                databaseWrite(answer, valueOfCurrentPoint);
+            }
+        }catch(NullPointerException e) {
+            System.out.println("In main working null?");
+        }
+
+
+
+
+
+    }
+
+
+
+    private void databaseWrite(String answer, Long valueOfCurrentPoint) {
+
+        System.out.println("database write");
+        if(answer.equals("startbucks")) {
+            valueOfCurrentPoint+=5;
+
+        }
+        mDatabase.child("users").child(mAuth.getUid()).child("points").setValue(valueOfCurrentPoint);
+
     }
 
     private void setFrag(int n){
