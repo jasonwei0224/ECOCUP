@@ -28,16 +28,16 @@ public class QRcode extends AppCompatActivity implements ZXingScannerView.Result
     private ZXingScannerView scannerView;
     private TextView txtResult;
     private String answer;
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    private Long valueOfCurrentPoint;
+    private Long currentPoint;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
 
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Intent i=getIntent();
+        System.out.println("please working"+i.getExtras().getLong("points"));
+        currentPoint=i.getExtras().getLong("points");
+
 
 
         scannerView=(ZXingScannerView) findViewById(R.id.sv_qr_qr);
@@ -83,12 +83,9 @@ public class QRcode extends AppCompatActivity implements ZXingScannerView.Result
         txtResult.setText(rawResult.getText());
 
         processRawResult(rawResult.getText());
-        databaseRead();
         Intent i =new Intent(QRcode.this, MainActivity.class);
-        System.out.println("Please"+valueOfCurrentPoint);
+        i.putExtra("points", currentPoint);
         i.putExtra("answer", answer);
-        i.putExtra("point", valueOfCurrentPoint);
-
         startActivity(i);
         scannerView.startCamera();
 
@@ -100,24 +97,7 @@ public class QRcode extends AppCompatActivity implements ZXingScannerView.Result
         answer=text;
         System.out.println(answer);
     }
-    private void databaseRead() {
-        System.out.println("database REad");
-        // Read from the database
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                valueOfCurrentPoint = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
-                System.out.println("value of data"+valueOfCurrentPoint);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
-        });
-    }
 
 
 }

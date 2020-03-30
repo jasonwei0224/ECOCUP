@@ -37,6 +37,7 @@ public class Points extends Fragment {
 
     private FirebaseAuth mAuth;
     private TextView userPoints;
+    long points;
     ValueEventListener mPointsListener;
     DatabaseReference mDatabase;
     List<History> historyList;
@@ -71,6 +72,7 @@ public class Points extends Fragment {
 
 
 
+
         return view;
 
     }
@@ -85,6 +87,8 @@ public class Points extends Fragment {
                     break;
                 case R.id.btn_points_qr:
                     Intent j=new Intent(getActivity(), QRcode.class);
+                    System.out.println("What is in btn_points_qr"+points);
+                    j.putExtra("points", points);
                     startActivity(j);
                     break;
             }
@@ -107,7 +111,7 @@ public class Points extends Fragment {
 
                 }
 
-                long points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
+                points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
                 userPoints.setText(Long.toString(points));
 
                 HistoryListAdapter adapter = new HistoryListAdapter(mContext, historyList);

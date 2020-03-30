@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         readMuseumData();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        System.out.println("In Main");
 
 
         if(mAuth.getCurrentUser()==null) {
@@ -71,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             myStartActivity(LoginActivity.class);
 
         }
+
 
 
         bottomNavigationView=findViewById(R.id.bn_general);
@@ -114,14 +114,12 @@ public class MainActivity extends AppCompatActivity {
         try{
             if(i.getExtras().getString("answer")!=null) {
                 String answer=i.getExtras().getString("answer");
-                valueOfCurrentPoint=i.getExtras().getLong("point");
-                System.out.println("mainactivity(answer)"+answer);
-                System.out.println("mainactivity(point)"+valueOfCurrentPoint);
+                valueOfCurrentPoint=i.getExtras().getLong("points");
 
                 databaseWrite(answer, valueOfCurrentPoint);
             }
         }catch(NullPointerException e) {
-            System.out.println("null");
+            System.out.println("In main working null?");
         }
 
 
@@ -135,28 +133,12 @@ public class MainActivity extends AppCompatActivity {
     private void databaseWrite(String answer, Long valueOfCurrentPoint) {
 
         System.out.println("database write");
-        System.out.println(answer);
-        System.out.println(valueOfCurrentPoint);
         if(answer.equals("startbucks")) {
-            System.out.println("start");
-            System.out.println("points in databaseWrite"+valueOfCurrentPoint);
-            System.out.println(valueOfCurrentPoint+30);
-            System.out.println("end");
-        }
-        System.out.println("points in databaseWrite"+valueOfCurrentPoint);
+            valueOfCurrentPoint+=5;
 
-//        points = points - exhibitions.get(i).getPoint();
-//        System.out.println("POints " + points);
-//        Map<String, Object> update = new HashMap<>();
-//        update.put("/points", points);
-//        String id = mDatabase.push().getKey();
-//        History h = new History();
-//        h.setType("Redeem");
-//        h.setPointsRedeem(0 - Long.valueOf(exhibitions.get(i).getPoint()));
-//        h.setDate( new Date(System.currentTimeMillis()));
-//        update.put(id, h);
-//
-//        mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
+        }
+        mDatabase.child("users").child(mAuth.getUid()).child("points").setValue(valueOfCurrentPoint);
+
     }
 
     private void setFrag(int n){
