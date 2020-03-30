@@ -9,43 +9,112 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:gravity="right"
+            android:paddingTop="20dp"
+            android:background="@color/colorMain"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_main_logout"
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Logout"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="10">
+            </TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="80"
+                android:textSize="23dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="ECO CUP">
+
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/btn_main_logout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:layout_marginRight="10dp"
                 tools:layout_editor_absoluteX="149dp"
+                android:src="@drawable/logout2"
                 tools:layout_editor_absoluteY="44dp">
 
-            </Button>
+            </ImageView>
 
         </LinearLayout>
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorMain"
+            android:paddingBottom="30dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/userPoints"
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="TextView"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="50sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="30"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:textSize="50sp" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="20"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/coffee"/>
+
+                <TextView
+                    android:id="@+id/userPoints"
+                    android:layout_width="0dp"
+                    android:layout_weight="20"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="40"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:textSize="50sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="30"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:textSize="50sp" />
+
+
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/textView"
@@ -53,15 +122,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/points"
                 android:textAlignment="center"
-                android:textColor="#000000" />
+                android:textColor="#ffffff" />
 
             <Button
                 android:id="@+id/btn_points_qr"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="QRSCanner" />
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textColor="#ffffff"
+                android:text="QRSCanner"
+                android:background="@drawable/button_main"/>
         </LinearLayout>
 
         <TextView
@@ -73,6 +146,7 @@
             android:layout_marginRight="20dp"
             android:text="@string/my_history"
             android:textColor="#000000"
+            android:gravity="center"
             android:textSize="18sp" />
 
         <ListView

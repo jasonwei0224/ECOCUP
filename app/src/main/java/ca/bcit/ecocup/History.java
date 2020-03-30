@@ -32,14 +32,6 @@ public class History {
         this.pointsRedeem = pointsRedeem;
     }
 
-//    public Long getPoints() {
-//        return points;
-//    }
-//
-//    public void setPoints(Long points) {
-//        this.points = points;
-//    }
-
     public Date getDate() {
         return this.date;
     }
