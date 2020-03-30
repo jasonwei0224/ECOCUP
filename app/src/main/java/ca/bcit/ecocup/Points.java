@@ -42,7 +42,6 @@ public class Points extends Fragment {
     ValueEventListener mPointsListener;
     DatabaseReference mDatabase;
     List<History> historyList;
-
     ImageView btn_main_logout;
     Button btn_points_qr;
     private ListView listView;
