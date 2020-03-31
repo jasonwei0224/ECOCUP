@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -107,14 +109,27 @@ public class Rewards extends Fragment {
                     }
                 });
 
+                final ArrayList<String> test=new ArrayList<>();
 
                 ValueEventListener pointsListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         long p = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
-
-//                       assert u != null;
                         points = p;
+                        DataSnapshot temp=dataSnapshot.child("users").child(mAuth.getUid());
+
+                        for(DataSnapshot data:temp.getChildren()) {
+
+                            System.out.println(data.child("type"));
+
+                            if(data.child("type").getValue()!=null) {
+                                String tempString=data.child("type").getValue().toString();
+                                test.add(tempString);
+                            }
+
+                        }
+
+
 
                     }
 
@@ -128,20 +143,35 @@ public class Rewards extends Fragment {
                 confirmBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(test.contains(exhibitions.get(i).getTitle())) {
+                            System.out.println("This is contained");
+                            AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                            builder.setTitle("Information").setMessage("You already get this reward").setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    epicDialog.dismiss();
+                                }
+                            });
+                            builder.show();
+                        }else {
+                            System.out.println("This is not contained");
+                            points = points - exhibitions.get(i).getPoint();
+                            System.out.println("POints " + points);
+                            Map<String, Object> update = new HashMap<>();
+                            update.put("/points", points);
+                            String id = mDatabase.push().getKey();
+                            History h = new History();
+                            h.setType(exhibitions.get(i).getTitle());
+                            h.setPointsRedeem(Long.valueOf(exhibitions.get(i).getPoint()));
+                            h.setDate( new Date(System.currentTimeMillis()));
+                            update.put(id, h);
 
-                        points = points - exhibitions.get(i).getPoint();
-                        System.out.println("POints " + points);
-                        Map<String, Object> update = new HashMap<>();
-                        update.put("/points", points);
-                        String id = mDatabase.push().getKey();
-                        History h = new History();
-                        h.setType(exhibitions.get(i).getTitle());
-                        h.setPointsRedeem(Long.valueOf(exhibitions.get(i).getPoint()));
-                        h.setDate( new Date(System.currentTimeMillis()));
-                        update.put(id, h);
+                            mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
+                            epicDialog.dismiss();
+                        }
 
-                        mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
-                        epicDialog.dismiss();
+
+
                     }
                 });
 
