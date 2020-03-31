@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +40,7 @@ public class Rewards extends Fragment {
 
     private View view;
     ArrayList<Exhibition> exhibitions;
-    Dialog epicDialog;
+    Dialog epicDialog, epicDialog2;
     TextView tv_popup_title;
     ImageView iv_popup_pic;
     TextView tv_popup_desc;
@@ -59,20 +60,15 @@ public class Rewards extends Fragment {
         //this is to receive arraylist of vendors from MainActivity.
         Bundle bundle= getArguments();
         exhibitions=bundle.getParcelableArrayList("exhibitions");
-//        System.out.println(exhibitions);
 
 
         ListView lv_rewards_listview=(ListView)view.findViewById(R.id.lv_rewards_listview);
 
-
-
         ExhibitionList exAdapter=new ExhibitionList();
         lv_rewards_listview.setAdapter(exAdapter);
 
-//        exAdapter.addExhibition("aegeawgawegaewgawegae", "betqwteewqgasdgasdgasdgwqaetqwetagasdgsdbetgawesgasgd");
-
-
         epicDialog=new Dialog(getContext());
+        epicDialog2=new Dialog(getContext());
 
         lv_rewards_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -133,18 +129,20 @@ public class Rewards extends Fragment {
                 confirmBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         points = points - exhibitions.get(i).getPoint();
                         System.out.println("POints " + points);
                         Map<String, Object> update = new HashMap<>();
                         update.put("/points", points);
                         String id = mDatabase.push().getKey();
                         History h = new History();
-                        h.setType("Redeem");
-                        h.setPointsRedeem(0 - Long.valueOf(exhibitions.get(i).getPoint()));
+                        h.setType(exhibitions.get(i).getTitle());
+                        h.setPointsRedeem(Long.valueOf(exhibitions.get(i).getPoint()));
                         h.setDate( new Date(System.currentTimeMillis()));
                         update.put(id, h);
 
                         mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
+                        epicDialog.dismiss();
                     }
                 });
 
@@ -155,6 +153,9 @@ public class Rewards extends Fragment {
 
                 epicDialog.setContentView(view);
                 epicDialog.show();
+
+
+
 
             }
         });
@@ -227,4 +228,5 @@ public class Rewards extends Fragment {
             exhibitions.add(ex);
         }
     }
+
 }

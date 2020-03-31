@@ -49,7 +49,7 @@
                 android:layout_weight="10"
                 android:layout_marginRight="10dp"
                 tools:layout_editor_absoluteX="149dp"
-                android:src="@drawable/logout2"
+
                 tools:layout_editor_absoluteY="44dp">
 
             </ImageView>
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:textAlignment="center"
-                    android:text="Please use your poin!"
+                    android:text="Please use your point!"
                     android:textColor="#ffffff"
                     android:textStyle="bold"
                     android:textSize="20sp" />
@@ -88,9 +88,10 @@
         <TextView
             android:id="@+id/textView"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="List of Service"
+            android:text="Available Redemptions"
             android:textSize="20dp"
             android:textAlignment="center"
             android:textColor="#000000" />

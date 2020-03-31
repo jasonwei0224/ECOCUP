@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +41,7 @@ public class Points extends Fragment {
     private FirebaseAuth mAuth;
     private TextView userPoints;
     long points;
+    ImageView imageView5;
     ValueEventListener mPointsListener;
     DatabaseReference mDatabase;
     List<History> historyList;
@@ -47,6 +50,13 @@ public class Points extends Fragment {
     Button btn_points_qr;
     private ListView listView;
     Context mContext;
+
+    TextView tv_popup_title;
+//    ImageView iv_popup_pic;
+//    TextView tv_popup_desc;
+//    TextView tv_popup_point;
+    Button confirmBtn;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -71,6 +81,7 @@ public class Points extends Fragment {
         btn_points_qr=view.findViewById(R.id.btn_points_qr);
         btn_points_qr.setOnClickListener(onClickListener);
 
+        imageView5=view.findViewById(R.id.imageView5);
 
 
 
@@ -115,8 +126,28 @@ public class Points extends Fragment {
                 points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
                 userPoints.setText(Long.toString(points));
 
-                HistoryListAdapter adapter = new HistoryListAdapter(mContext, historyList);
-                listView.setAdapter(adapter);
+                if(historyList.size()==0) {
+                    hideShow(getView());
+
+                }else {
+                    hideShow2(getView());
+                    HistoryListAdapter adapter = new HistoryListAdapter(mContext, historyList);
+                    listView.setAdapter(adapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            System.out.println("Clicked??");
+                            view=LayoutInflater.from(getActivity()).inflate(R.layout.activity_login, null);
+                            System.out.println(view);
+//                            tv_popup_title=view.findViewById(R.id.tv_popup_title);
+//                            tv_popup_title.setText(historyList.get(i).getType());
+//                            confirmBtn = view.findViewById(R.id.confirm);
+
+                        }
+                    });
+
+                }
+
             }
 
             @Override
@@ -125,5 +156,12 @@ public class Points extends Fragment {
             }
         };
         mDatabase.addValueEventListener(pointsListener);
+    }
+
+    public void hideShow(View view) {
+        imageView5.setVisibility(View.VISIBLE);
+    }
+    public void hideShow2(View view) {
+        imageView5.setVisibility(View.GONE);
     }
 }
