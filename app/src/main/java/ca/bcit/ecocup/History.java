@@ -1,5 +1,8 @@
 package ca.bcit.ecocup;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 public class History {
@@ -7,6 +10,7 @@ public class History {
     private Long pointsRedeem;
     private Date date;
     private String type;
+
 
 
     public String getType() {
@@ -39,4 +43,5 @@ public class History {
     public void setDate(Date date) {
         this.date = date;
     }
+
 }

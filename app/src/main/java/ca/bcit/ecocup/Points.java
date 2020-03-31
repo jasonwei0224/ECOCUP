@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.media.tv.TvContract;
 
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -52,10 +54,10 @@ public class Points extends Fragment {
     Context mContext;
 
     TextView tv_popup_title;
-//    ImageView iv_popup_pic;
-//    TextView tv_popup_desc;
-//    TextView tv_popup_point;
+    ImageView popup_close_popup;
     Button confirmBtn;
+    Dialog epicDialog;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -83,7 +85,7 @@ public class Points extends Fragment {
 
         imageView5=view.findViewById(R.id.imageView5);
 
-
+        epicDialog=new Dialog(getContext());
 
         return view;
 
@@ -109,6 +111,7 @@ public class Points extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
         ValueEventListener pointsListener = new ValueEventListener() {
             @Override
@@ -136,14 +139,33 @@ public class Points extends Fragment {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            System.out.println("Clicked??");
-                            view=LayoutInflater.from(getActivity()).inflate(R.layout.activity_login, null);
-                            System.out.println(view);
-//                            tv_popup_title=view.findViewById(R.id.tv_popup_title);
-//                            tv_popup_title.setText(historyList.get(i).getType());
-//                            confirmBtn = view.findViewById(R.id.confirm);
+                            view=LayoutInflater.from(getActivity()).inflate(R.layout.custom_popup_point, null);
+
+                            popup_close_popup=view.findViewById(R.id.popup_close_popup);
+                            popup_close_popup.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    epicDialog.dismiss();
+                                }
+                            });
+
+                            tv_popup_title=view.findViewById(R.id.tv_popup_title);
+                            tv_popup_title.setText(historyList.get(i).getType());
+                            confirmBtn = view.findViewById(R.id.confirm);
+
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    epicDialog.dismiss();
+                                }
+                            });
+
+                            epicDialog.setContentView(view);
+                            epicDialog.show();
+
 
                         }
+
                     });
 
                 }

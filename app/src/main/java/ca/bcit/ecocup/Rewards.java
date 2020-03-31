@@ -40,7 +40,7 @@ public class Rewards extends Fragment {
 
     private View view;
     ArrayList<Exhibition> exhibitions;
-    Dialog epicDialog, epicDialog2;
+    Dialog epicDialog;
     TextView tv_popup_title;
     ImageView iv_popup_pic;
     TextView tv_popup_desc;
@@ -68,7 +68,6 @@ public class Rewards extends Fragment {
         lv_rewards_listview.setAdapter(exAdapter);
 
         epicDialog=new Dialog(getContext());
-        epicDialog2=new Dialog(getContext());
 
         lv_rewards_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
