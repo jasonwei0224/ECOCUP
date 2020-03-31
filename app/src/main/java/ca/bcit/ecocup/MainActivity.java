@@ -57,21 +57,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         readVendorData();
         readMuseumData();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        System.out.println(mAuth.getCurrentUser().getEmail());
 
         if(mAuth.getCurrentUser()==null) {
-
-//            System.out.println(mAuth.getCurrentUser());
-
             myStartActivity(LoginActivity.class);
-
         }
-
-
 
         bottomNavigationView=findViewById(R.id.bn_general);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -94,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
         points=new Points();
         rewards=new Rewards();
         maps=new Maps();
-
-
 
         //this is to send data from mainactivity to other fragment.
         Bundle bundle;
@@ -200,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     sample.setX(0);
                 }
-
+                sample.setServiceProvided(token[28]);
                 vendors.add(sample);
                // System.out.println(sample);
             }
