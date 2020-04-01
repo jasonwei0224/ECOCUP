@@ -10,5 +10,24 @@
     <string name="redeem">Redeem</string>
     <string name="title_activity_maps">Map</string>
 
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <string name="qr_scanner">QR Scanner</string>
+    <string name="eco_cup">ECO CUP</string>
+    <string name="name_placehoder">Name</string>
+    <string name="password_confirm">Confrim Password</string>
+
+    <string name="redemption_text">Redeem for rewards!</string>
+    <string name="available_redemption">Available Redemptions</string>
+
+    <string name="confirm">CONFIRM</string>
+
+    <string name="auth_success">Authentication Success</string>
+    <string name="aut_failed">Authentication Failed</string>
+
+    <string name="auth_error">Please enter all fields</string>
+    <string name="incorrect_password">Incorrect Password</string>
+    <string name="must_accept">You must accept to use the QR Scanner</string>
 
 </resources>

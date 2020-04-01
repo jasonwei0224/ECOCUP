@@ -134,7 +134,7 @@ public class Rewards extends Fragment {
                     @Override
                     public void onClick(View view) {
                         points = points - exhibitions.get(i).getPoint();
-                        System.out.println("POints " + points);
+//                        System.out.println("POints " + points);
                         Map<String, Object> update = new HashMap<>();
                         update.put("/points", points);
                         String id = mDatabase.push().getKey();
@@ -210,7 +210,7 @@ public class Rewards extends Fragment {
             try{
                     iv.setImageResource(images[i]);
             }catch(Exception e) {
-                System.out.println("Exception needed");
+//                System.out.println("Exception needed");
             }
 
             tv.setText(exhibition.getTitle());

@@ -45,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
             switch(view.getId()) {
                 case R.id.btn_signup_signup:
                     signup();
-                    System.out.println("Signup pressed");
+//                    System.out.println("Signup pressed");
                     break;
             }
         }
@@ -82,10 +82,10 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                         });
             }else {
-                Toast.makeText(this, "Password is not correct", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.incorrect_password), Toast.LENGTH_SHORT).show();
             }
         }else {
-            Toast.makeText(this, "Pleaes input all", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.auth_error), Toast.LENGTH_SHORT).show();
         }
     }
 

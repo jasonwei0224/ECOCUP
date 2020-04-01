@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 databaseWrite(answer, valueOfCurrentPoint);
             }
         }catch(NullPointerException e) {
-            System.out.println("In main working null?");
+//            System.out.println("In main working null?");
         }
 
 
