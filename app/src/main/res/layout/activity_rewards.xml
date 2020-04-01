@@ -70,7 +70,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/gift4"/>
+                    android:src="@drawable/gift"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,6 +87,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorSecond"
             android:orientation="vertical">
 
             <TextView
@@ -97,7 +98,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="Available Redemptions"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="#ffffff"
                 android:textSize="20dp" />
         </LinearLayout>
 
