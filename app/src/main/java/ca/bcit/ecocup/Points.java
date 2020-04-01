@@ -99,6 +99,9 @@ public class Points extends Fragment {
                     break;
                 case R.id.btn_points_qr:
                     Intent j=new Intent(getActivity(), QRcode.class);
+
+//                    System.out.println("What is in btn_points_qr"+points);
+
                     j.putExtra("points", points);
                     startActivity(j);
                     break;

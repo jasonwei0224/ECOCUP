@@ -29,6 +29,9 @@ public class QRcode extends AppCompatActivity implements ZXingScannerView.Result
         setContentView(R.layout.activity_qr);
 
         Intent i=getIntent();
+
+//        System.out.println("please working"+i.getExtras().getLong("points"));
+
         currentPoint=i.getExtras().getLong("points");
 
         scannerView=(ZXingScannerView) findViewById(R.id.sv_qr_qr);
@@ -45,7 +48,7 @@ public class QRcode extends AppCompatActivity implements ZXingScannerView.Result
 
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse response) {
-                        Toast.makeText(QRcode.this, "You must accept this permission", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QRcode.this, getString(R.string.must_accept), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

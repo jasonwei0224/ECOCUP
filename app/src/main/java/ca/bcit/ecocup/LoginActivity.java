@@ -65,21 +65,23 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
+
+
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                startToast("Authentication success");
+                                startToast(getString(R.string.auth_success));
                                 myStartActivity(MainActivity.class);
 
                             } else {
                                 // If sign in fails, display a message to the user.
-                                startToast("Authentication failed");
 
+                                startToast(getString(R.string.aut_failed));
                             }
 
                         }
                     });
 
         }else {
-            Toast.makeText(this, "Pleaes input all", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.auth_error), Toast.LENGTH_SHORT).show();
         }
 
     }

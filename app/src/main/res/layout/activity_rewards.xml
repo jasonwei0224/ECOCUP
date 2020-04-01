@@ -33,11 +33,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="80"
-                android:textSize="23dp"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
                 android:gravity="center"
-                android:text="ECO CUP">
+                android:text="@string/eco_cup"
+                android:textColor="#ffffff"
+                android:textSize="23dp"
+                android:textStyle="bold">
 
 
             </TextView>
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Redeem for rewards!"
+                android:text="@string/redemption_text"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
@@ -95,8 +95,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+
+                android:text="@string/available_redemption"
+
                 android:layout_marginBottom="10dp"
                 android:text="Available Redemptions"
+
                 android:textAlignment="center"
                 android:textColor="#ffffff"
                 android:textSize="20dp" />

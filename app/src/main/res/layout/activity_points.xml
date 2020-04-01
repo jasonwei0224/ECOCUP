@@ -33,11 +33,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="80"
-                android:textSize="23dp"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
                 android:gravity="center"
-                android:text="ECO CUP">
+                android:text="@string/eco_cup"
+                android:textColor="#ffffff"
+                android:textSize="23dp"
+                android:textStyle="bold">
 
 
             </TextView>
@@ -133,7 +133,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/button_main"
-                android:text="QR SCanner"
+                android:text="@string/qr_scanner"
                 android:textColor="#ffffff" />
         </LinearLayout>
 

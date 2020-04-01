@@ -136,6 +136,20 @@ public class Rewards extends Fragment {
                 confirmBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        points = points - exhibitions.get(i).getPoint();
+//                        System.out.println("POints " + points);
+                        Map<String, Object> update = new HashMap<>();
+                        update.put("/points", points);
+                        String id = mDatabase.push().getKey();
+                        History h = new History();
+                        h.setType("Redeem");
+                        h.setPointsRedeem(0 - Long.valueOf(exhibitions.get(i).getPoint()));
+                        h.setDate( new Date(System.currentTimeMillis()));
+                        update.put(id, h);
+
+                        mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
+
                         if(test.contains(exhibitions.get(i).getTitle())) {
                             System.out.println("This is contained");
                             AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
@@ -162,6 +176,7 @@ public class Rewards extends Fragment {
                             mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
                             epicDialog.dismiss();
                         }
+
 
 
 
@@ -233,7 +248,7 @@ public class Rewards extends Fragment {
             try{
                     iv.setImageResource(images[i]);
             }catch(Exception e) {
-                System.out.println("Exception needed");
+//                System.out.println("Exception needed");
             }
 
             tv.setText(exhibition.getTitle());
