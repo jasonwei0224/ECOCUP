@@ -14,6 +14,7 @@ public class Vendor implements Parcelable {
     String name;
     double x;
     double y;
+    String serviceProvided;
 
     public Vendor() {
 
@@ -23,6 +24,7 @@ public class Vendor implements Parcelable {
         name=src.readString();
         x=src.readDouble();
         y=src.readDouble();
+        serviceProvided=src.readString();
     }
 
     public static final Creator<Vendor> CREATOR=new Creator<Vendor>() {
@@ -63,6 +65,14 @@ public class Vendor implements Parcelable {
         return name+" "+x+" "+y;
     }
 
+
+    public String getServiceProvided() {
+        return serviceProvided;
+    }
+
+    public void setServiceProvided(String serviceProvided) {
+        this.serviceProvided = serviceProvided;
+    }
     @Override
     public int describeContents() {
         return 0;
@@ -73,5 +83,6 @@ public class Vendor implements Parcelable {
         parcel.writeString(name);
         parcel.writeDouble(x);
         parcel.writeDouble(y);
+        parcel.writeString(serviceProvided);
     }
 }

@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="exampleToast">
+        <item name="colorBackground">#63a893</item>
+        <item name="textColor">#ffffff</item>
+        <item name="iconLeft">@drawable/markergreen</item>
+        <item name="length">LONG</item>
+
+    </style>
 </resources>

@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG="SignupActivity";
     private FirebaseAuth mAuth;
     Button btn_login_login;
     Button btn_login_signup;
@@ -31,9 +30,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         btn_login_login=findViewById(R.id.btn_login_login);
-        btn_login_login.setOnClickListener(onClickListner);
+        btn_login_login.setOnClickListener(onClickListener);
         btn_login_signup=findViewById(R.id.btn_login_signup);
-        btn_login_signup.setOnClickListener(onClickListner);
+        btn_login_signup.setOnClickListener(onClickListener);
 
         mAuth=FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
@@ -41,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener onClickListner=new View.OnClickListener() {
+    View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch(view.getId()) {
@@ -67,15 +66,15 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
 
+
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 startToast(getString(R.string.auth_success));
-
                                 myStartActivity(MainActivity.class);
 
                             } else {
                                 // If sign in fails, display a message to the user.
-                                startToast(getString(R.string.aut_failed));
 
+                                startToast(getString(R.string.aut_failed));
                             }
 
                         }

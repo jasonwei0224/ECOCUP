@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo5" />
+        app:srcCompat="@drawable/mainlogo" />
 
     <EditText
         android:id="@+id/et_signup_email"

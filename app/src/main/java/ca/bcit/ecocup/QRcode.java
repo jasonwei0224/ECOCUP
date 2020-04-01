@@ -8,12 +8,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -35,10 +29,10 @@ public class QRcode extends AppCompatActivity implements ZXingScannerView.Result
         setContentView(R.layout.activity_qr);
 
         Intent i=getIntent();
+
 //        System.out.println("please working"+i.getExtras().getLong("points"));
+
         currentPoint=i.getExtras().getLong("points");
-
-
 
         scannerView=(ZXingScannerView) findViewById(R.id.sv_qr_qr);
         txtResult=(TextView) findViewById(R.id.tv_qr_bottom);
@@ -71,10 +65,6 @@ public class QRcode extends AppCompatActivity implements ZXingScannerView.Result
     @Override
     protected void onDestroy() {
         scannerView.stopCamera();
-        System.out.println("Called");
-
-
-
         super.onDestroy();
     }
 
@@ -95,7 +85,6 @@ public class QRcode extends AppCompatActivity implements ZXingScannerView.Result
     private void processRawResult(String text) {
         txtResult.setText(text);
         answer=text;
-        System.out.println(answer);
     }
 
 

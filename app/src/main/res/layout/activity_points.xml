@@ -49,7 +49,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="10"
                 android:clickable="true"
-                android:src="@drawable/logout2"
+                android:src="@drawable/logout"
                 tools:layout_editor_absoluteX="149dp"
                 tools:layout_editor_absoluteY="44dp">
 
@@ -95,7 +95,6 @@
                     android:layout_weight="20"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="40"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textStyle="bold"
@@ -149,6 +148,20 @@
             android:text="@string/my_history"
             android:textColor="#000000"
             android:textSize="18sp" />
+
+
+        <ImageView
+            android:id="@+id/iv_points_history"
+            android:layout_width="200dp"
+            android:layout_height="322dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:src="@drawable/history"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
 
         <ListView
             android:id="@+id/history"

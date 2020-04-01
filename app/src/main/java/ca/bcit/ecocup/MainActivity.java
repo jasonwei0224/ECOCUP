@@ -59,19 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
         readVendorData();
         readMuseumData();
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
         if(mAuth.getCurrentUser()==null) {
-
-//            System.out.println(mAuth.getCurrentUser());
-
             myStartActivity(LoginActivity.class);
-
         }
-
-
 
         bottomNavigationView=findViewById(R.id.bn_general);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -95,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
         rewards=new Rewards();
         maps=new Maps();
 
-
-
         //this is to send data from mainactivity to other fragment.
         Bundle bundle;
         bundle=new Bundle();
@@ -108,8 +100,6 @@ public class MainActivity extends AppCompatActivity {
             setFrag(0);
         }
 
-
-
         Intent i =getIntent();
         try{
             if(i.getExtras().getString("answer")!=null) {
@@ -119,20 +109,13 @@ public class MainActivity extends AppCompatActivity {
                 databaseWrite(answer, valueOfCurrentPoint);
             }
         }catch(NullPointerException e) {
+
 //            System.out.println("In main working null?");
+
         }
-
-
-
-
-
     }
 
-
-
     private void databaseWrite(String answer, Long valueOfCurrentPoint) {
-
-        System.out.println("database write");
         if(answer.equals("startbucks")) {
             valueOfCurrentPoint+=5;
 
@@ -174,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
     //this method is to read data from raw data2.csv. (from tutorial)
     private void readVendorData() {
-        InputStream is=getResources().openRawResource(R.raw.data2);
+        InputStream is=getResources().openRawResource(R.raw.vendorlist);
         BufferedReader reader=new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
@@ -200,9 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     sample.setX(0);
                 }
-
+                sample.setServiceProvided(token[28]);
                 vendors.add(sample);
-               // System.out.println(sample);
             }
         }catch(IOException e) {
 
@@ -214,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
     //this method is to read data from raw data2.csv. (from tutorial)
     private void readMuseumData() {
-        InputStream is=getResources().openRawResource(R.raw.data);
+        InputStream is=getResources().openRawResource(R.raw.exhibitionlist);
         BufferedReader reader=new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
@@ -235,10 +217,8 @@ public class MainActivity extends AppCompatActivity {
                 sample.setPoint(Integer.parseInt(token[4]));
 
                 exhibitions.add(sample);
-               // System.out.println(sample);
             }
         }catch(IOException e) {
-
             e.printStackTrace();
         }
 
