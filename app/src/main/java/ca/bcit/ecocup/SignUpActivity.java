@@ -23,7 +23,6 @@ public class SignUpActivity extends AppCompatActivity {
     private static final String TAG="SignupActivity";
     private FirebaseAuth mAuth;
     DatabaseReference database;
-
     Button btn_signup_signup;
 
     @Override

@@ -44,7 +44,6 @@ public class Points extends Fragment {
     private TextView userPoints;
     long points;
     ImageView imageView5;
-    ValueEventListener mPointsListener;
     DatabaseReference mDatabase;
     List<History> historyList;
     ImageView btn_main_logout;
@@ -82,7 +81,7 @@ public class Points extends Fragment {
         btn_points_qr=view.findViewById(R.id.btn_points_qr);
         btn_points_qr.setOnClickListener(onClickListener);
 
-        imageView5=view.findViewById(R.id.imageView5);
+        imageView5=view.findViewById(R.id.iv_points_history);
 
         epicDialog=new Dialog(getContext());
 
@@ -100,7 +99,6 @@ public class Points extends Fragment {
                     break;
                 case R.id.btn_points_qr:
                     Intent j=new Intent(getActivity(), QRcode.class);
-                    System.out.println("What is in btn_points_qr"+points);
                     j.putExtra("points", points);
                     startActivity(j);
                     break;
@@ -116,7 +114,6 @@ public class Points extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 historyList.clear();
-
                 for(DataSnapshot userSnapshot: dataSnapshot.child("users").child(mAuth.getUid()).getChildren()) {
                     if(userSnapshot.hasChildren()) {
                         History h = userSnapshot.getValue(History.class);
@@ -124,15 +121,14 @@ public class Points extends Fragment {
                     }
 
                 }
-
                 points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
                 userPoints.setText(Long.toString(points));
 
                 if(historyList.size()==0) {
-                    hideShow(getView());
+                    showNoHistory(getView());
 
                 }else {
-                    hideShow2(getView());
+                    hideNoHistory(getView());
                     HistoryListAdapter adapter = new HistoryListAdapter(mContext, historyList);
                     listView.setAdapter(adapter);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -140,13 +136,7 @@ public class Points extends Fragment {
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             view=LayoutInflater.from(getActivity()).inflate(R.layout.custom_popup_point, null);
 
-                            popup_close_popup=view.findViewById(R.id.popup_close_popup);
-                            popup_close_popup.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    epicDialog.dismiss();
-                                }
-                            });
+
 
                             tv_popup_title=view.findViewById(R.id.tv_popup_title);
                             tv_popup_title.setText(historyList.get(i).getType());
@@ -162,13 +152,10 @@ public class Points extends Fragment {
                             epicDialog.setContentView(view);
                             epicDialog.show();
 
-
                         }
 
                     });
-
                 }
-
             }
 
             @Override
@@ -179,10 +166,10 @@ public class Points extends Fragment {
         mDatabase.addValueEventListener(pointsListener);
     }
 
-    public void hideShow(View view) {
+    public void showNoHistory(View view) {
         imageView5.setVisibility(View.VISIBLE);
     }
-    public void hideShow2(View view) {
+    public void hideNoHistory(View view) {
         imageView5.setVisibility(View.GONE);
     }
 }

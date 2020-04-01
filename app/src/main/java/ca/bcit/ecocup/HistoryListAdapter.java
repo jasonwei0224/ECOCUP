@@ -38,8 +38,7 @@ public class HistoryListAdapter extends ArrayAdapter<History> {
         History history = historyList.get(position);
 
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String d = formatter.format(history.getDate());
-        time.setText(d);
+        time.setText(formatter.format(history.getDate()));
         pointsRedeem.setText(String.format(Locale.ENGLISH, "%d", history.getPointsRedeem()));
         type.setText((history.getType()));
 

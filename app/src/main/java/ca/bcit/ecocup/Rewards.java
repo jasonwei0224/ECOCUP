@@ -2,24 +2,17 @@ package ca.bcit.ecocup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -219,7 +212,7 @@ public class Rewards extends Fragment {
             Context c=viewGroup.getContext();
             if(view==null) {
                 LayoutInflater li=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view=li.inflate(R.layout.j21, viewGroup, false);
+                view=li.inflate(R.layout.list_view_item, viewGroup, false);
             }
             //need to check
             ImageView iv = view.findViewById(R.id.iv_rewards_pic);
