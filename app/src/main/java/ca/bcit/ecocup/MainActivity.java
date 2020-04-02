@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        System.out.println("There is mAuth"+mAuth.getCurrentUser());
         if(mAuth.getCurrentUser()==null) {
             myStartActivity(LoginActivity.class);
         }

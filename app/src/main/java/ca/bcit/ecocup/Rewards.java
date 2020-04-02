@@ -147,20 +147,32 @@ public class Rewards extends Fragment {
                             });
                             builder.show();
                         }else {
-                            System.out.println("This is not contained");
-                            points = points - exhibitions.get(i).getPoint();
-                            System.out.println("POints " + points);
-                            Map<String, Object> update = new HashMap<>();
-                            update.put("/points", points);
-                            String id = mDatabase.push().getKey();
-                            History h = new History();
-                            h.setType(exhibitions.get(i).getTitle());
-                            h.setPointsRedeem(Long.valueOf(exhibitions.get(i).getPoint()));
-                            h.setDate( new Date(System.currentTimeMillis()));
-                            update.put(id, h);
+                            if(points < exhibitions.get(i).getPoint()) {
+                                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                                builder.setTitle("Information").setMessage("You don't have enough value").setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        epicDialog.dismiss();
+                                    }
+                                });
+                                builder.show();
+                            }else {
+                                System.out.println("This is not contained");
+                                points = points - exhibitions.get(i).getPoint();
+                                System.out.println("POints " + points);
+                                Map<String, Object> update = new HashMap<>();
+                                update.put("/points", points);
+                                String id = mDatabase.push().getKey();
+                                History h = new History();
+                                h.setType(exhibitions.get(i).getTitle());
+                                h.setPointsRedeem(Long.valueOf(exhibitions.get(i).getPoint()));
+                                h.setDate( new Date(System.currentTimeMillis()));
+                                update.put(id, h);
 
-                            mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
-                            epicDialog.dismiss();
+                                mDatabase.child("users").child(mAuth.getUid()).updateChildren(update);
+                                epicDialog.dismiss();
+                            }
+
                         }
 
 
@@ -168,10 +180,10 @@ public class Rewards extends Fragment {
                     }
                 });
 
-                if (points < exhibitions.get(i).getPoint()){
-                    confirmBtn.setClickable(false);
-                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.colorBlack));
-                }
+//                if (points < exhibitions.get(i).getPoint()){
+//                    confirmBtn.setClickable(false);
+//                    confirmBtn.setBackgroundColor(getResources().getColor(R.color.colorBlack));
+//                }
 
                 epicDialog.setContentView(view);
                 epicDialog.show();

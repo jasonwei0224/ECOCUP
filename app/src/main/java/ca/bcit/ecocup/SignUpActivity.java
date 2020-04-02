@@ -68,6 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             .child("history").setValue("");
                                     database.child("users").child(mAuth.getCurrentUser().getUid())
                                             .child("points").setValue(0);
+                                    System.out.println("is it working"+mAuth.getCurrentUser().getUid());
                                     myStartActivity(MainActivity.class);
 
 
