@@ -124,6 +124,7 @@ public class Points extends Fragment {
                     }
 
                 }
+
                 points = (long) dataSnapshot.child("users").child(mAuth.getUid()).child("points").getValue();
                 userPoints.setText(Long.toString(points));
 
